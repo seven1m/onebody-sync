@@ -1,12 +1,12 @@
-# OneBody Sync for PowerChurch
+# PowerChurch Export Script
 
-Setup:
+## Setup
 
 ```
 bundle install
 ```
 
-Usage:
+## Usage
 
 ```
 ruby sync.rb path/to/data out.csv
