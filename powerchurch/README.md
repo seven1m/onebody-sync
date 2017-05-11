@@ -1,0 +1,156 @@
+# OneBody Sync for PowerChurch
+
+Setup:
+
+```
+bundle install
+```
+
+Usage:
+
+```
+ruby sync.rb path/to/data out.csv
+```
+
+## Info
+
+PowerChurch uses the DBF format (dBase, FoxPro, etc.).
+For our purposes, most data is available in the `me.dbf` (personal) and `ma.dbf` (family) tables.
+
+## me.dbf
+
+Columns:
+
+* MAIL\_NO
+* PERS\_NO
+* STATUS
+* LASTNAME
+* FIRSTNAME
+* MIDDLENAME
+* SUFFIX
+* PREFNAME
+* NAMEFORMAT
+* SALUT
+* TITLE
+* M\_F
+* MEPHN1
+* MEPHN1\_TYP
+* MEPHN1\_UNL
+* MEPHN2
+* MEPHN2\_TYP
+* MEPHN2\_UNL
+* MEPHN3
+* MEPHN3\_TYP
+* MEPHN3\_UNL
+* MEPHN4
+* MEPHN4\_TYP
+* MEPHN4\_UNL
+* MEPHN5
+* MEPHN5\_TYP
+* MEPHN5\_UNL
+* E\_MAIL
+* E\_MAIL\_UNL
+* E\_MAILBULK
+* E\_MAILSTMT
+* E\_MAIL2
+* MEWEB1
+* MEWEB2
+* ADULT
+* USER1
+* USER2
+* USER3
+* USER4
+* USER5
+* CODE1
+* CODE2
+* CODE3
+* CODE4
+* CODE5
+* BORN
+* DATE2
+* DATE3
+* DATE4
+* DATE5
+* DATE6
+* DATE7
+* DATE8
+* DATE9
+* DATE10
+* DATE11
+* DATE12
+* ENV\_NO
+* NOTE1
+* NOTE2
+* NOTE3
+* NOTE4
+* NOTE5
+* ZIP
+* VISITAREA
+* MARITAL
+* TAGGED
+* MENOTES
+* MEID
+* ALLERGY
+* MEDICATION
+* CONDITION
+
+## ma.dbf
+
+Columns:
+
+* MAIL\_NO
+* CATEGORY
+* LASTNAME
+* FIRSTNAME
+* NAMELINE
+* SALUT
+* ADDRESS
+* ADDRESS2
+* CITY
+* STATE
+* ZIP
+* COUNTRY
+* CR\_ROUTE
+* DEL\_PT
+* CASSDATE
+* LOT
+* SPECIAL1
+* SPECIAL2
+* SPECIAL3
+* DATE\_REG
+* MAILOUT
+* PUBADD
+* INCL\_MEMB
+* PHONE1
+* PHONE1\_UNL
+* PHONE1\_TYP
+* PHONE2
+* PHONE2\_UNL
+* PHONE2\_TYP
+* PHONE3
+* PHONE3\_UNL
+* PHONE3\_TYP
+* E\_MAIL
+* E\_MAIL\_UNL
+* E\_MAILBULK
+* E\_MAILSTMT
+* MAWEB1
+* VISITAREA
+* NOTE1
+* MANOTES
+* WHOVISITS
+* UPDATED
+* TAGGED
+* CURADDRESS
+* ALT\_ADD
+* ALT\_ADD2
+* ALT\_CITY
+* ALT\_STATE
+* ALT\_ZIP
+* ALT\_CNTRY
+* ALT\_CR
+* ALT\_DEL\_PT
+* ALT\_LOT
+* ALT\_PHONE1
+* ALT\_START
+* ALT\_STOP
