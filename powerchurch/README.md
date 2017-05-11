@@ -9,7 +9,7 @@ bundle install
 ## Usage
 
 ```
-ruby sync.rb path/to/data out.csv
+ruby export.rb path/to/data out.csv
 ```
 
 ## Info
