@@ -22,7 +22,7 @@ def full_url(url, path = '')
 end
 
 unless (filename = ARGV.first)
-  puts "You must specify the path to your csv file"
+  puts 'You must specify the path to your csv file'
   exit(1)
 end
 
@@ -30,32 +30,36 @@ data = File.read(filename, encoding: 'ASCII-8BIT')
 headings = CSV.parse(data)[0]
 
 puts 'uploading file'
-RestClient.post(full_url(URL, '/admin/imports'), { file: File.open(filename) }) do |response|
-  location = full_url(response.headers[:location]) rescue fail(response)
+RestClient.post(full_url(URL, '/admin/imports'), file: File.open(filename)) do |response|
+  location = begin
+               full_url(response.headers[:location])
+             rescue
+               raise(response)
+             end
 
   puts 'parsing file'
   begin
     sleep 1
     resp = JSON.parse(RestClient.get(location + '.json'))
     print "  #{resp['row_progress']}%\r"
-  end while %w(pending parsing).include?(resp['status'])
+  end while %w[pending parsing].include?(resp['status'])
 
-  fail resp['error_message'] if resp['status'] == 'errored'
+  raise resp['error_message'] if resp['status'] == 'errored'
 
   puts 'executing import'
   settings = IMPORT_SETTINGS.merge(
     mappings: headings.each_with_object({}) { |k, h| h[k] = k }
   )
   RestClient.patch(location, status: 'matched', import: settings, dont_preview: '1') do |response|
-    fail response unless response.headers[:location]
+    raise response unless response.headers[:location]
     location = full_url(response.headers[:location]) + '.json'
     begin
       sleep 1
       resp = JSON.parse(RestClient.get(location))
       print "  #{resp['row_progress']}%\r"
-    end while %w(previewed active).include?(resp['status'])
+    end while %w[previewed active].include?(resp['status'])
 
-    fail resp['error_message'] if resp['status'] == 'errored'
+    raise resp['error_message'] if resp['status'] == 'errored'
 
     puts '  100%'
     puts response.headers[:location]
