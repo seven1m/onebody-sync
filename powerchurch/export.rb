@@ -20,6 +20,11 @@ COLUMNS = %w(
 
 (DATA_PATH, OUT_PATH) = ARGV
 
+unless DATA_PATH && OUT_PATH
+  puts 'ERROR: You must pass path to database and path for output csv file'
+  exit 1
+end
+
 me = DBF::Table.new(File.join(DATA_PATH, 'me.dbf'))
 ma = DBF::Table.new(File.join(DATA_PATH, 'ma.dbf'))
 
