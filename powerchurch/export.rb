@@ -7,6 +7,8 @@ COLUMNS = %w(
   legacy_id
   first_name
   last_name
+  birthday
+  email
   family_legacy_id
   family_name
   family_last_name
@@ -39,6 +41,8 @@ CSV.open(OUT_PATH, 'w') do |csv|
       person['PERS_NO'],
       person['FIRSTNAME'].strip,
       person['LASTNAME'].strip,
+      person['BORN'] && person['BORN'].strftime('%Y-%m-%d'),
+      person['E_MAIL'].strip,
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
