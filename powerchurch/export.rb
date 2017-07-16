@@ -6,9 +6,11 @@ require 'csv'
 COLUMNS = %w(
   legacy_id
   first_name
+  middle_name
   last_name
   birthday
   email
+  gender
   family_legacy_id
   family_name
   family_last_name
@@ -40,9 +42,11 @@ CSV.open(OUT_PATH, 'w') do |csv|
     csv << [
       person['PERS_NO'],
       person['FIRSTNAME'].strip,
+      person['MIDDLENAME'].strip,
       person['LASTNAME'].strip,
       person['BORN'] && person['BORN'].strftime('%Y-%m-%d'),
       person['E_MAIL'].strip,
+      person['M_F'].strip,
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
