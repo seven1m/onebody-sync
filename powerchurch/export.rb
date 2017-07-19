@@ -38,6 +38,7 @@ COLUMNS = %w[
   date11
   date12
   status
+  sequence
   family_legacy_id
   family_name
   family_last_name
@@ -105,6 +106,7 @@ CSV.open(OUT_PATH, 'w') do |csv|
       format_date(person['DATE11']),
       format_date(person['DATE12']),
       status(person['STATUS']),
+      person['PERS_NO'],
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
