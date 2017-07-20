@@ -23,8 +23,11 @@ COLUMNS = %w[
   first_name
   middle_name
   last_name
+  suffix
   email
+  alternate_email
   gender
+  child
   birthday
   date2
   date3
@@ -39,6 +42,9 @@ COLUMNS = %w[
   date12
   status
   sequence
+  mobile_phone
+  work_phone
+  fax
   family_legacy_id
   family_name
   family_last_name
@@ -91,8 +97,11 @@ CSV.open(OUT_PATH, 'w') do |csv|
       person['FIRSTNAME'].strip,
       person['MIDDLENAME'].strip,
       person['LASTNAME'].strip,
+      person['SUFFIX'].strip,
       person['E_MAIL'].strip,
+      person['E_MAIL2'].strip,
       person['M_F'].strip,
+      { 'Y' => 'false', 'N' => 'true' }[person['ADULT'].strip],
       format_date(person['BORN']),
       format_date(person['DATE2']),
       format_date(person['DATE3']),
@@ -107,6 +116,9 @@ CSV.open(OUT_PATH, 'w') do |csv|
       format_date(person['DATE12']),
       status(person['STATUS']),
       person['PERS_NO'],
+      person['MEPHN3'],
+      person['MEPHN1'],
+      person['MEPHN2'],
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
