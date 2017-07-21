@@ -45,6 +45,11 @@ COLUMNS = %w[
   mobile_phone
   work_phone
   fax
+  note1
+  note2
+  note3
+  note4
+  note5
   family_legacy_id
   family_name
   family_last_name
@@ -119,6 +124,11 @@ CSV.open(OUT_PATH, 'w') do |csv|
       person['MEPHN3'],
       person['MEPHN1'],
       person['MEPHN2'],
+      person['NOTE1'],
+      person['NOTE2'],
+      person['NOTE3'],
+      person['NOTE4'],
+      person['NOTE5'],
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
