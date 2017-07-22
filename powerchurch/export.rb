@@ -77,6 +77,20 @@ CODES = me_codes.each_with_object({}) do |code, hash|
   hash[code['FIELD']][code['CODE']] = code['DESCRIPT']
 end
 
+# SKREF.DBF => descriptions of activities and skills
+# SK.DBF    => relation from person to activity/skill record
+
+# for exploration
+#Dir[File.join(DATA_PATH, '*.DBF')].each do |path|
+  #puts
+  #puts '-' * 10
+  #p path
+  #DBF::Table.new(path).each do |rec|
+    #p rec.attributes
+  #end
+#end
+#exit
+
 families = ma.each_with_object({}) { |f, h| h[f['MAIL_NO']] = f }
 
 def format_date(date)
