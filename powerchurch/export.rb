@@ -50,6 +50,7 @@ COLUMNS = %w[
   note3
   note4
   note5
+  classes
   family_legacy_id
   family_name
   family_last_name
@@ -68,28 +69,31 @@ unless DATA_PATH && OUT_PATH
   exit 1
 end
 
-me = DBF::Table.new(File.join(DATA_PATH, 'me.dbf'))
-ma = DBF::Table.new(File.join(DATA_PATH, 'ma.dbf'))
-me_codes = DBF::Table.new(File.join(DATA_PATH, 'macodes.dbf'))
+me = DBF::Table.new(File.join(DATA_PATH, 'ME.DBF'))
+ma = DBF::Table.new(File.join(DATA_PATH, 'MA.DBF'))
+me_codes = DBF::Table.new(File.join(DATA_PATH, 'MACODES.DBF'))
+sk_codes = DBF::Table.new(File.join(DATA_PATH, 'SKCODES.DBF'))
+sk_ref = DBF::Table.new(File.join(DATA_PATH, 'SKREF.DBF'))
+sk = DBF::Table.new(File.join(DATA_PATH, 'SK.DBF'))
 
 CODES = me_codes.each_with_object({}) do |code, hash|
   hash[code['FIELD']] ||= {}
   hash[code['FIELD']][code['CODE']] = code['DESCRIPT']
 end
 
-# SKREF.DBF => descriptions of activities and skills
-# SK.DBF    => relation from person to activity/skill record
+SK_CODES = sk_codes.each_with_object({}) do |code, hash|
+  hash[code['CODE']] = code['DESCRIPT']
+end
 
-# for exploration
-#Dir[File.join(DATA_PATH, '*.DBF')].each do |path|
-  #puts
-  #puts '-' * 10
-  #p path
-  #DBF::Table.new(path).each do |rec|
-    #p rec.attributes
-  #end
-#end
-#exit
+SKILL_NAMES = sk_ref.each_with_object({}) do |code, hash|
+  hash[code['SKILL_NO']] = code['DESC']
+end
+
+SKILLS = sk.each_with_object({}) do |code, hash|
+  hash[code['PERS_NO']] ||= []
+  role = SK_CODES[code['ROLE']]
+  hash[code['PERS_NO']] << "sk#{code['SKILL_NO']}[#{role}]"
+end
 
 families = ma.each_with_object({}) { |f, h| h[f['MAIL_NO']] = f }
 
@@ -143,6 +147,7 @@ CSV.open(OUT_PATH, 'w') do |csv|
       person['NOTE3'],
       person['NOTE4'],
       person['NOTE5'],
+      (SKILLS[person['PERS_NO']] || []).join(','),
       person['MAIL_NO'],
       family['NAMELINE'].strip,
       family['LASTNAME'].strip,
