@@ -50,6 +50,16 @@ COLUMNS = %w[
   note3
   note4
   note5
+  user1
+  user2
+  user3
+  user4
+  user5
+  code1
+  code2
+  code3
+  code4
+  code5
   classes
   family_legacy_id
   family_name
@@ -147,6 +157,16 @@ CSV.open(OUT_PATH, 'w') do |csv|
       person['NOTE3'],
       person['NOTE4'],
       person['NOTE5'],
+      ME_CODES.fetch('USER1', {})[person['USER1']],
+      ME_CODES.fetch('USER2', {})[person['USER2']],
+      ME_CODES.fetch('USER3', {})[person['USER3']],
+      ME_CODES.fetch('USER4', {})[person['USER4']],
+      ME_CODES.fetch('USER5', {})[person['USER5']],
+      ME_CODES.fetch('CODE1', {})[person['CODE1']],
+      ME_CODES.fetch('CODE2', {})[person['CODE2']],
+      ME_CODES.fetch('CODE3', {})[person['CODE3']],
+      ME_CODES.fetch('CODE4', {})[person['CODE4']],
+      ME_CODES.fetch('CODE5', {})[person['CODE5']],
       (SKILLS[person['PERS_NO']] || []).join(','),
       person['MAIL_NO'],
       family['NAMELINE'].strip,
