@@ -71,12 +71,12 @@ end
 
 me = DBF::Table.new(File.join(DATA_PATH, 'ME.DBF'))
 ma = DBF::Table.new(File.join(DATA_PATH, 'MA.DBF'))
-me_codes = DBF::Table.new(File.join(DATA_PATH, 'MACODES.DBF'))
+me_codes = DBF::Table.new(File.join(DATA_PATH, 'MECODES.DBF'))
 sk_codes = DBF::Table.new(File.join(DATA_PATH, 'SKCODES.DBF'))
 sk_ref = DBF::Table.new(File.join(DATA_PATH, 'SKREF.DBF'))
 sk = DBF::Table.new(File.join(DATA_PATH, 'SK.DBF'))
 
-CODES = me_codes.each_with_object({}) do |code, hash|
+ME_CODES = me_codes.each_with_object({}) do |code, hash|
   hash[code['FIELD']] ||= {}
   hash[code['FIELD']][code['CODE']] = code['DESCRIPT']
 end
@@ -102,7 +102,7 @@ def format_date(date)
 end
 
 def status(code)
-  description = CODES.fetch('CATEGORY', {})[code]
+  description = ME_CODES.fetch('STATUS', {})[code]
   if (found = STATUSES.detect { |_, matching| matching.include?(description) })
     found.first.to_s
   else
