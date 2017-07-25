@@ -70,6 +70,7 @@ COLUMNS = %w[
   family_state
   family_zip
   family_country
+  family_home_phone
 ].freeze
 
 (DATA_PATH, OUT_PATH) = ARGV
@@ -176,7 +177,8 @@ CSV.open(OUT_PATH, 'w') do |csv|
       family['CITY'].strip,
       family['STATE'].strip,
       family['ZIP'].strip,
-      family['COUNTRY'].strip
+      family['COUNTRY'].strip,
+      family['PHONE1']
     ]
   end
 end
