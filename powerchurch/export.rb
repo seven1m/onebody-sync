@@ -76,7 +76,7 @@ COLUMNS = %w[
 (DATA_PATH, OUT_PATH) = ARGV
 
 unless DATA_PATH && OUT_PATH
-  puts 'ERROR: You must pass path to database and path for output csv file'
+  puts 'Usage: ruby export.rb path/to/data output.csv'
   exit 1
 end
 
